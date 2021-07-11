@@ -26,7 +26,7 @@ export default class Feed extends Component{
     }
 
     renderItem=({item:story})=>{
-        return <StoryCard story1={story}/>
+        return <StoryCard story={story}/>
     }
 
     keyExtractor=(item, index)=>index.toString();
