@@ -29,7 +29,9 @@ export default class StoryCard extends Component {
 
   async _loadFontsAsync() {
     await Font.loadAsync(customFonts);
-    this.setState({ fontsLoaded: true });
+    this.setState({
+      fontsLoaded: true,
+    });
   }
 
   componentDidMount() {
@@ -102,19 +104,19 @@ const styles = StyleSheet.create({
   },
   storyTitleText: {
     fontSize: RFValue(20),
-    fontFamily: 'BubbleGum-Sans',
+    fontFamily: 'Bubblegum-Sans',
     color: 'red',
   },
   storyAuthorText: {
     fontSize: RFValue(18),
     paddingTop: RFValue(5),
-    fontFamily: 'BubbleGum-Sans',
+    fontFamily: 'Bubblegum-Sans',
     color: 'blue',
   },
   storyDescriptionText: {
     fontSize: RFValue(13),
-    fontFamily: 'BubbleGum-Sans',
-    color: 'black',
+    fontFamily: 'Bubblegum-Sans',
+    color: 'white',
     paddingTop: RFValue(10),
   },
   actionContainer: {
@@ -134,6 +136,6 @@ const styles = StyleSheet.create({
   likeText: {
     color: 'white',
     fontSize: RFValue(25),
-    fontFamily: 'BubbleGum-Sans',
+    fontFamily: 'Bubblegum-Sans',
   },
 });
