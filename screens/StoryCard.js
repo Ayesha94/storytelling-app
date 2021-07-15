@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,23 +7,23 @@ import {
   Platform,
   StatusBar,
   Image,
-  Dimensions
-} from "react-native";
-
-import AppLoading from "expo-app-loading";
-import * as Font from "expo-font";
-import { RFValue } from "react-native-responsive-fontsize";
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 let customFonts = {
-  "Bubblegum-Sans": require("../assets/fonts/BubblegumSans-Regular.ttf")
+  'Bubblegum-Sans': require('../assets/fonts/BubblegumSans-Regular.ttf'),
 };
 
 export default class StoryCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fontsLoaded: false
+      fontsLoaded: false,
     };
   }
 
@@ -41,19 +41,18 @@ export default class StoryCard extends Component {
       return <AppLoading />;
     } else {
       return (
-        <View style={styles.container}>
-          <SafeAreaView style={styles.droidSafeArea}/>
-          <View style={styles.cardContainer}>
-            <View style={styles.storyImage}>
-              <Image source={require("../assets/story_image_1.png")}
-                      style={{
-                        resizeMode:'contain', 
-                        width:Dimensions.get('window').width-60, 
-                        height:250, 
-                        borderRadius:10
-                        }}>
-              </Image>
-            </View>
+        <TouchableOpacity
+          style={styles.container}
+          onPress={() => {
+            this.props.navigation.navigate('StoryScreen', {
+              story: this.props.story,
+            });
+          }}>
+          <View style={styles.cardcontainer}>
+            <Image
+              source={require('../assets/story_image_1.png')}
+              style={styles.storyImage}
+            />
             <View style={styles.titleContainer}>
               <Text style={styles.storyTitleText}>
                 {this.props.story.title}
@@ -61,18 +60,19 @@ export default class StoryCard extends Component {
               <Text style={styles.storyAuthorText}>
                 {this.props.story.author}
               </Text>
-              <Text style={styles.descriptionText}>
+              <Text style={styles.storyDescriptionText}>
                 {this.props.story.description}
               </Text>
             </View>
+
             <View style={styles.actionContainer}>
               <View style={styles.likeButton}>
-                <Ionicons name={"heart"} size={RFValue(30)} color={"white"} />
-                <Text style={styles.likeText}>12k</Text>
+                <Ionicons name={'heart'} size={RFValue(30)} color={'white'} />
+                <Text style={styles.likeText}>12K</Text>
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     }
   }
@@ -82,53 +82,58 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  droidSafeArea:{
-    marginTop:Platform.OS==="android"?StatusBar.currentHeight:0
+  droidSafeArea: {
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
-  cardContainer:{
-   margin:RFValue(13),
-    backgroundColor:"#2f345d",
-    borderRadius:20,
+  cardContainer: {
+    margin: RFValue(13),
+    backgroundColor: 'white',
+    borderRadius: RFValue(20),
   },
-  titleContainer:{
-    paddingLeft:RFValue(20),
-    justifyContent:"center"
+  storyImage: {
+    resizeMode: 'contain',
+    width: '97%',
+    alignSelf: 'center',
+    height: RFValue(250),
   },
-  storyTitleText:{
-    fontFamily:"Bubblegum-Sans",
-    fontSize:25,
-    color:"white"
+  titleContainer: {
+    paddingLeft: RFValue(20),
+    justifyContent: 'center',
   },
-  storyAuthorText:{
-    fontFamily:"Bubblegum-Sans",
-    fontSize:25,
-    color:"white"
+  storyTitleText: {
+    fontSize: RFValue(20),
+    fontFamily: 'BubbleGum-Sans',
+    color: 'red',
   },
-  descriptionContainer:{
-    marginTop:5
+  storyAuthorText: {
+    fontSize: RFValue(18),
+    paddingTop: RFValue(5),
+    fontFamily: 'BubbleGum-Sans',
+    color: 'blue',
   },
-  descriptionText:{
-    fontFamily:"Bubblegum-Sans",
-    fontSize:13,
-    color:"white"
+  storyDescriptionText: {
+    fontSize: RFValue(13),
+    fontFamily: 'BubbleGum-Sans',
+    color: 'black',
+    paddingTop: RFValue(10),
   },
-  actionContainer:{
-    marginTop:10,
-    justifyContent:"center",
-    alignItems:"center"
+  actionContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: RFValue(10),
   },
-  likeButton:{
-    backgroundColor:"#eb3948",
-    borderRadius:30,
-    width:160,
-    height:40,
-    flexDirection:"row"
+  likeButton: {
+    justifyContent: 'center',
+    width: RFValue(160),
+    height: RFValue(40),
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#EB3948',
+    borderRadius: RFValue(30),
   },
-  likeText:{
-    color:"white",
-    fontFamily:"Bubblegum-Sans",
-    fontSize:RFValue(25),
-    marginLeft:RFValue(5),
-  }
-  
+  likeText: {
+    color: 'white',
+    fontSize: RFValue(25),
+    fontFamily: 'BubbleGum-Sans',
+  },
 });
